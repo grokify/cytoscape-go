@@ -1,0 +1,33 @@
+{
+  "irVersion": "1.0",
+  "project": "cytoscape-go",
+  "repository": "https://github.com/grokify/cytoscape-go",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify", "johncwang@gmail.com"],
+  "releases": [
+    {
+      "version": "v0.1.1",
+      "date": "2026-04-12",
+      "fixed": [
+        { "description": "Include HTML template in release (was excluded by `*.html` gitignore rule)", "commit": "aae39bb" }
+      ]
+    },
+    {
+      "version": "v0.1.0",
+      "date": "2026-04-12",
+      "highlights": [
+        { "description": "Initial release of Go library for generating Cytoscape.js graph visualizations" }
+      ],
+      "added": [
+        { "description": "Graph builder with nodes, edges, and metadata", "commit": "e461489" },
+        { "description": "Multiple layout algorithms: Cose, Dagre, Cola, Circle, Grid, Concentric, BreadthFirst, Preset", "commit": "e461489" },
+        { "description": "Pre-built stylesheets: DefaultStyle, CodeGraphStyle, ERDStyle", "commit": "e461489" },
+        { "description": "Standalone HTML generation with embedded JavaScript", "commit": "e461489" },
+        { "description": "Interactive features: search, filters, export (PNG/SVG), layout selector", "commit": "e461489" },
+        { "description": "Dark mode support", "commit": "e461489" },
+        { "description": "JSON export in Cytoscape elements format", "commit": "e461489" }
+      ]
+    }
+  ]
+}
