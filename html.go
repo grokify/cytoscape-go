@@ -161,13 +161,15 @@ func (g *Graph) ToHTML(opts HTMLOptions) ([]byte, error) {
 		opts.UseCola = true
 	}
 
+	// JSON is generated from internal data structures via json.Marshal,
+	// which properly escapes special characters. Not user input.
 	data := templateData{
 		Title:        opts.Title,
 		Description:  opts.Description,
 		SourceURL:    opts.SourceURL,
-		ElementsJSON: template.JS(elementsJSON),
-		StyleJSON:    template.JS(styleJSON),
-		LayoutJSON:   template.JS(layoutJSON),
+		ElementsJSON: template.JS(elementsJSON), //nolint:gosec // JSON from json.Marshal is safe
+		StyleJSON:    template.JS(styleJSON),    //nolint:gosec // JSON from json.Marshal is safe
+		LayoutJSON:   template.JS(layoutJSON),   //nolint:gosec // JSON from json.Marshal is safe
 		Options:      opts,
 		NodeTypes:    nodeTypes,
 		EdgeTypes:    edgeTypes,
