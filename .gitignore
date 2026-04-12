@@ -10,7 +10,10 @@
 
 # Output
 *.out
+
+# Ignore generated HTML (but not templates)
 *.html
+!templates/*.html
 
 # IDE
 .idea/
