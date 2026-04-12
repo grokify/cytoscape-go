@@ -146,7 +146,7 @@ func (l *CircleLayout) Config() map[string]any {
 
 // ConcentricLayout arranges nodes in concentric circles by degree or attribute.
 type ConcentricLayout struct {
-	Padding      int
+	Padding        int
 	MinNodeSpacing int
 	// Concentric function returns the concentric level for a node
 	// Higher values = closer to center
@@ -172,7 +172,7 @@ func (l *ConcentricLayout) Config() map[string]any {
 
 // BreadthFirstLayout arranges nodes in a BFS tree.
 type BreadthFirstLayout struct {
-	Roots   []string // Root node IDs
+	Roots    []string // Root node IDs
 	Directed bool
 	Padding  int
 	Circle   bool // Arrange in a circle instead of tree
@@ -217,23 +217,23 @@ func (l *PresetLayout) Config() map[string]any {
 // ColaLayout is an advanced force-directed layout.
 // Requires cytoscape-cola extension.
 type ColaLayout struct {
-	Animate      bool
-	MaxSimTime   int // Max simulation time in ms
-	NodeSpacing  int
-	EdgeLength   int
-	Padding      int
-	Randomize    bool
-	Convergence  float64
+	Animate     bool
+	MaxSimTime  int // Max simulation time in ms
+	NodeSpacing int
+	EdgeLength  int
+	Padding     int
+	Randomize   bool
+	Convergence float64
 }
 
 func (l *ColaLayout) Name() string { return "cola" }
 
 func (l *ColaLayout) Config() map[string]any {
 	cfg := map[string]any{
-		"name":        "cola",
-		"animate":     l.Animate,
-		"padding":     30,
-		"randomize":   false,
+		"name":              "cola",
+		"animate":           l.Animate,
+		"padding":           30,
+		"randomize":         false,
 		"maxSimulationTime": 2000,
 	}
 	if l.MaxSimTime > 0 {
