@@ -273,6 +273,9 @@
 
         #cy {
             flex: 1;
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
             background: var(--bg-primary);
         }
 
@@ -327,6 +330,7 @@
             position: relative;
             flex: 1;
             display: flex;
+            flex-direction: column;
         }
 
         .toolbar {
@@ -507,10 +511,37 @@
     </div>
 
     <script>
+        // Register layout extensions
+        {{if .Options.UseDagre}}
+        if (typeof cytoscapeDagre !== 'undefined') {
+            cytoscape.use(cytoscapeDagre);
+        }
+        {{end}}
+        {{if .Options.UseCola}}
+        if (typeof cytoscapeCola !== 'undefined') {
+            cytoscape.use(cytoscapeCola);
+        }
+        {{end}}
+
         // Initialize Cytoscape
-        const elements = {{.ElementsJSON}};
+        const rawElements = {{.ElementsJSON}};
         const style = {{.StyleJSON}};
         const layoutConfig = {{.LayoutJSON}};
+
+        // Filter out edges with missing source/target nodes
+        const nodeIds = new Set(rawElements.filter(e => e.group === 'nodes').map(e => e.data.id));
+        const elements = rawElements.filter(e => {
+            if (e.group === 'edges') {
+                const hasSource = nodeIds.has(e.data.source);
+                const hasTarget = nodeIds.has(e.data.target);
+                if (!hasSource || !hasTarget) {
+                    console.warn('Skipping edge with missing node:', e.data.id, 'source:', e.data.source, 'target:', e.data.target);
+                    return false;
+                }
+            }
+            return true;
+        });
+        console.log('Loaded', nodeIds.size, 'nodes,', elements.filter(e => e.group === 'edges').length, 'valid edges');
 
         const cy = cytoscape({
             container: document.getElementById('cy'),
